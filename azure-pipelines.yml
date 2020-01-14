@@ -29,11 +29,11 @@ steps:
     pathToSources: '$(System.DefaultWorkingDirectory)/**/**/src/main/java/'
     reportDirectory: '$(System.DefaultWorkingDirectory)/**/**/site/cobertura'
 
-- task: PublishBuildArtifacts@1
+- task: PublishTestResults@2
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'calc'
-    publishLocation: 'Container'
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TEST-*.xml'
+    testRunTitle: 'Calc Tests'
 
 - task: ArchiveFiles@2
   inputs:
@@ -44,14 +44,14 @@ steps:
     replaceExistingArchive: true
     verbose: true
 
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'calc'
+    publishLocation: 'Container'
+
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(Pipeline.Workspace)'
     artifact: 'calc pipeline'
     publishLocation: 'pipeline'
-
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: '**/TEST-*.xml'
-    testRunTitle: 'Calc Tests'
