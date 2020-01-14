@@ -10,6 +10,15 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: SonarQubePrepare@4
+  inputs:
+    SonarQube: 'Sonar Connection'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'SimpleCalculator'
+    cliProjectName: 'SimpleCalculator'
+    cliSources: '.'
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -28,6 +37,8 @@ steps:
     summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/**/site/cobertura/coverage.xml'
     pathToSources: '$(System.DefaultWorkingDirectory)/**/**/src/main/java/'
     reportDirectory: '$(System.DefaultWorkingDirectory)/**/**/site/cobertura'
+
+- task: SonarQubeAnalyze@4
 
 - task: PublishTestResults@2
   inputs:
