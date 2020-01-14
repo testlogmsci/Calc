@@ -35,12 +35,6 @@ steps:
     ArtifactName: 'calc'
     publishLocation: 'Container'
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Pipeline.Workspace)'
-    artifact: 'calc pipeline'
-    publishLocation: 'pipeline'
-
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(Build.BinariesDirectory)'
@@ -49,3 +43,9 @@ steps:
     archiveFile: '$(Build.ArtifactStagingDirectory)/HelloWorld-$(Build.BuildId).zip'
     replaceExistingArchive: true
     verbose: true
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'calc pipeline'
+    publishLocation: 'pipeline'
