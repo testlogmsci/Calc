@@ -15,8 +15,8 @@ steps:
     SonarQube: 'Sonar Connection'
     scannerMode: 'CLI'
     configMode: 'manual'
-    cliProjectKey: 'SimpleCalculator'
-    cliProjectName: 'SimpleCalculator'
+    cliProjectKey: 'LoganCalcTest'
+    cliProjectName: 'LoganCalcTest'
     cliSources: '.'
 
 - task: Maven@3
