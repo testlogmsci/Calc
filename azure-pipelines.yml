@@ -11,6 +11,9 @@ pool:
 
 schedules:
 - cron: "0 0 * * *"
+branches:
+include:
+- master
 
 steps:
 - task: SonarQubePrepare@4
